@@ -1,0 +1,11 @@
+<phpunit
+        bootstrap="vendor/autoload.php"
+        colors="true"
+        >
+    <testsuites>
+        <testsuite name="controllers">
+            <directory>test/controllers</directory>
+            <exclude>test/controllers/IndexTest.php</exclude>
+        </testsuite>
+    </testsuites>
+</phpunit>
