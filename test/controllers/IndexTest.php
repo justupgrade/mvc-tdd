@@ -40,6 +40,11 @@ class IndexTest extends PHPUnit_Extensions_Selenium2TestCase
         $this->assertEquals('Error', $this->title());
         $this->url('http://mvc.dev/index/wrong_action');
         $this->assertEquals('Error', $this->title());
+        #redirect to login page
+        $this->url('http://mvc.dev/login/index');
+        $this->assertEquals('Login', $this->title());
+        $this->url('http://mvc.dev/login/');
+        $this->assertEquals('Login', $this->title());
     }
 
     //public function test

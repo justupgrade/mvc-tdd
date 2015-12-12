@@ -3,9 +3,12 @@
         colors="true"
         >
     <testsuites>
-        <testsuite name="controllers">
+        <testsuite name="controllers-tests">
             <directory>test/controllers</directory>
-            <exclude>test/controllers/IndexTest.php</exclude>
+            <exclude>atest/controllers/IndexTest.php</exclude>
+        </testsuite>
+        <testsuite name="view-tests">
+            <directory>test/view</directory>
         </testsuite>
     </testsuites>
 </phpunit>

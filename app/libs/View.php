@@ -17,6 +17,8 @@ class View
 
     public function render($name)
     {
+        require_once 'view/header.php';
         require 'view/' . $name . '.php';
+        require_once 'view/footer.php';
     }
 } 

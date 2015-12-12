@@ -1,2 +1,3 @@
-<?php require_once 'view/header.php' ?>
-<strong style="color: red;">This is the error!</strong>
+<div class="alert alert-danger" role="alert">
+    <strong>Error!</strong> Page does not exist!
+</div>

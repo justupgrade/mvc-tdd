@@ -1,2 +1,3 @@
-<?php require_once 'view/header.php' ?>
-<strong style="color: steelblue;">This is homepage!</strong>
+<div class="page-header">
+    <h1>This is homepage!</h1>
+</div>
