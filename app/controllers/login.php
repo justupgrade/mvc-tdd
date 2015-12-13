@@ -17,7 +17,27 @@ class Login extends Controller
     # index action: render login form || redirect to user account if already logged in
     public function index()
     {
+        App::getModel('login');
         # user not logged in
         $this->view->render('login/index');
+    }
+
+    # login action
+    public function loginPost()
+    {
+        $model = App::getModel('login');
+        $model->auth();
+    }
+
+    # display register form
+    public function register()
+    {
+        $this->view->render('login/register');
+    }
+
+    # register action
+    public function registerPost()
+    {
+
     }
 } 

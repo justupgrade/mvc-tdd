@@ -2,12 +2,24 @@
         bootstrap="vendor/autoload.php"
         colors="true"
         >
+    <php>
+        <var name="DB_DSN" value="mysql:dbname=mvc_test;host=localhost" />
+        <var name="DB_USER" value="***" /> <!-- config.ini -->
+        <var name="DB_PASSWD"  value="***" /> <!-- config.ini -->
+        <var name="DB_NAME" value="mvc_test" />
+    </php>
     <testsuites>
-        <testsuite name="controllers-tests">
+        <testsuite name="model-login">
+            <directory>test/model/login</directory>
+        </testsuite>
+        <testsuite name="view-login">
+            <directory>test/view/login</directory>
+        </testsuite>
+        <testsuite name="controllers-all">
             <directory>test/controllers</directory>
             <exclude>atest/controllers/IndexTest.php</exclude>
         </testsuite>
-        <testsuite name="view-tests">
+        <testsuite name="view-all">
             <directory>test/view</directory>
         </testsuite>
     </testsuites>

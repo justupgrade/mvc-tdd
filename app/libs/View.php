@@ -21,4 +21,19 @@ class View
         require 'view/' . $name . '.php';
         require_once 'view/footer.php';
     }
+
+    public function getRegisterUrl()
+    {
+        return URL."login/register/";
+    }
+
+    public function getRegisterAction()
+    {
+        return URL."login/registerPost/";
+    }
+
+    public function getLoginAction()
+    {
+        return URL."login/loginPost/";
+    }
 } 

@@ -17,7 +17,7 @@ class Index extends Controller
     public function index($args = null)
     {
         $this->view->render('index/index');
-        if($args) printf($args);
+
         return true;
     }
 } 

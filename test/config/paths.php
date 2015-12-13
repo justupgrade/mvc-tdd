@@ -7,5 +7,5 @@
  */
 
 define('URL', 'http://mvc.dev/');
-define('ROOT_DIR', getcwd().'/../');
-define('APP_DIR', getcwd().'/');
+define('ROOT_DIR', getcwd().'/');
+define('APP_DIR', getcwd().'/app/');

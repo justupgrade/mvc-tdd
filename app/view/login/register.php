@@ -1,9 +1,6 @@
 <div>
-    <a href="<?php echo $this->getRegisterUrl() ?>">Create an Account</a>
-</div>
-<div>
-    <h2>Login</h2>
-    <form id="login-form" action="<?php echo $this->getLoginAction() ?>" method="post">
+    <h2>Register</h2>
+    <form id="register-form" method="post" action="<?php echo $this->getRegisterAction() ?>">
         <ul>
             <li>
                 <label for="email">Email</label>
@@ -14,7 +11,11 @@
                 <input type="password" name="password" id="pwd" required />
             </li>
             <li>
-                <input type="submit" name="login" value="Login" />
+                <label for="repeat-pwd">Repeat Password</label>
+                <input type="password" name="password_repeat" id="repeat-pwd" required/>
+            </li>
+            <li>
+                <input type="submit" name="register" value="Send" />
             </li>
         </ul>
     </form>

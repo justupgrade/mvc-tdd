@@ -2,6 +2,8 @@
 
 namespace model;
 
+use Model;
+
 class Help extends Model
 {
     function __construct()
