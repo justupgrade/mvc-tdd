@@ -12,4 +12,10 @@ class Controller
     {
         $this->view = new View();
     }
+
+    protected function redirectUrl($location)
+    {
+        header('Location: ' . $location);
+        exit;
+    }
 } 

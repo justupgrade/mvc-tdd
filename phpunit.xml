@@ -19,6 +19,9 @@
             <directory>test/controllers</directory>
             <exclude>atest/controllers/IndexTest.php</exclude>
         </testsuite>
+        <testsuite name="controllers-login">
+            <directory>test/controllers/login</directory>
+        </testsuite>
         <testsuite name="view-all">
             <directory>test/view</directory>
         </testsuite>

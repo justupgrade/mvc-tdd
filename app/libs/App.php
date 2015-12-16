@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 class App
 {
     static public function getModel($name)
