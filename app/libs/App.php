@@ -11,4 +11,24 @@ class App
 
         return new $ClassName;
     }
+
+    static public function getRegisterUrl()
+    {
+        return URL."login/register/";
+    }
+
+    static public function getRegisterAction()
+    {
+        return URL."login/registerPost/";
+    }
+
+    static public function getLoginUrl()
+    {
+        return URL.'login';
+    }
+
+    static public function getLoginAction()
+    {
+        return URL."login/loginPost/";
+    }
 }

@@ -24,16 +24,16 @@ class View
 
     public function getRegisterUrl()
     {
-        return URL."login/register/";
+        return App::getRegisterUrl();
     }
 
     public function getRegisterAction()
     {
-        return URL."login/registerPost/";
+        return App::getRegisterAction();
     }
 
     public function getLoginAction()
     {
-        return URL."login/loginPost/";
+        return App::getLoginAction();
     }
 } 

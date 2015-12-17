@@ -19,8 +19,6 @@ class Login extends Controller
     # index action: render login form || redirect to user account if already logged in
     public function index()
     {
-        trigger_error($_SESSION['logged_in']);
-
         if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
             $this->redirectUrl(self::LOGIN_REDIRECT_URL);
         }
@@ -45,18 +43,43 @@ class Login extends Controller
         }
 
         # get errors from model; put them into session
-        $this->redirectUrl(URL.'login/');
+        $this->redirectUrl(URL.'login');
     }
 
     # display register form
     public function register()
     {
+        $this->view->page_title = 'Create Account';
         $this->view->render('login/register');
     }
 
     # register action
     public function registerPost()
     {
+        $model = App::getModel('login');
+        # validate request data
+        $model->init($_POST);
+        if($model->register()) {
+            $this->redirectUrl(URL.'login');
+        }
 
+        $this->redirectUrl(URL.'login/register');
+    }
+
+    # TODO:: only if user is logged in
+    # TODO:: password protected
+    public function deletePost()
+    {
+        $model = App::getModel('login');
+
+        $model->init($_POST);
+
+        if($model->delete()) {
+            unset($_SESSION['logged_in']);
+            $this->redirectUrl(URL);
+        }
+
+        //display errors...
+        $this->redirectUrl(URL.'help');
     }
 } 
