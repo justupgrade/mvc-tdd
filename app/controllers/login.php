@@ -33,7 +33,7 @@ class Login extends Controller
     {
         $model = App::getModel('login');
         # validate request data
-        $model->init($_POST);
+        $model->init($this->request->getPost());
         # auth
         if($model->auth()) { # successful login
             # login user
@@ -66,13 +66,19 @@ class Login extends Controller
         $this->redirectUrl(URL.'login/register');
     }
 
+    public function delete()
+    {
+        $this->view->page_title = 'Delete Account';
+        $this->view->render('login/delete');
+    }
+
     # TODO:: only if user is logged in
     # TODO:: password protected
     public function deletePost()
     {
         $model = App::getModel('login');
 
-        $model->init($_POST);
+        $model->init($this->request->getPost());
 
         if($model->delete()) {
             unset($_SESSION['logged_in']);
@@ -81,5 +87,13 @@ class Login extends Controller
 
         //display errors...
         $this->redirectUrl(URL.'help');
+    }
+
+    //TODO::add some messages
+    public function out()
+    {
+        unset($_SESSION['logged_in']);
+
+        $this->redirectUrl(URL);
     }
 } 

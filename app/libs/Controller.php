@@ -11,6 +11,7 @@ class Controller
     function __construct()
     {
         $this->view = new View();
+        $this->request = new Request();
     }
 
     protected function redirectUrl($location)

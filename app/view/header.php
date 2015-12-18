@@ -16,7 +16,11 @@
                     <a href="/help" class="nav-link">Help</a>
                 </li>
                 <li class="nav-item">
+                    <?php if(!App::userLoggedIn()): ?>
                     <a href="/login" class="nav-link">Login</a>
+                    <?php else: ?>
+                    <a href="/login/out" class="nav-link">Logout</a>
+                    <?php endif ?>
                 </li>
             </ul>
         </div>

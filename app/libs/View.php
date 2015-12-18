@@ -36,4 +36,9 @@ class View
     {
         return App::getLoginAction();
     }
+
+    public function getDeleteAction()
+    {
+        return App::getDeleteAction();
+    }
 } 

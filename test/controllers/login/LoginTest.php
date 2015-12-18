@@ -28,8 +28,9 @@ class LoginTest extends PHPUnit_Extensions_Selenium2TestCase
     }
 
     # registerPost action
-    public function off_testRegister()
+    public function testRegister()
     {
+        unset($_SESSION['logged_in']);
         $this->url(URL.'login/register');
         $this->assertEquals('Create Account', $this->title());
 
@@ -55,19 +56,17 @@ class LoginTest extends PHPUnit_Extensions_Selenium2TestCase
         $email_field->value($new_email);
         $pass_field->value($new_pass);
         $submit->submit();
-
         $this->assertEquals('MVC', $this->title());
 
-        # delete new user:
-        $_POST['email'] = $new_email;
-        $this->url(URL.'login/deletePost');
-        #expect: redirect to homepage
+        # log out
+        $this->url(URL.'login/out');
         $this->assertEquals('MVC', $this->title());
     }
 
     # loginPost action
-    public function off_testLogin()
+    public function testLogin()
     {
+        unset($_SESSION['logged_in']);
         $this->url(URL.'login');
         $this->assertEquals('Login', $this->title());
         $email_field = $this->byName('email');
@@ -79,6 +78,22 @@ class LoginTest extends PHPUnit_Extensions_Selenium2TestCase
         $pass_field->value("123");
         $submit->submit();
 
+        $this->assertEquals('MVC', $this->title());
+    }
+
+    public function testDelete()
+    {
+        # delete new user:
+        $email = 'another@test.com';
+        $password = 'pass';
+        $this->url(URL.'login/delete');
+        $email_input = $this->byName('email');
+        $pass_input = $this->byName('password');
+        $submit_input = $this->byName('delete');
+        $email_input->value($email);
+        $pass_input->value($password);
+        $submit_input->submit();
+        #expect: redirect to homepage
         $this->assertEquals('MVC', $this->title());
     }
 } 
