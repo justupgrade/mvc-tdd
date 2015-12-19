@@ -19,7 +19,7 @@ class Login extends Controller
     # index action: render login form || redirect to user account if already logged in
     public function index()
     {
-        if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']) {
+        if(App::userLoggedIn()) {
             $this->redirectUrl(self::LOGIN_REDIRECT_URL);
         }
 
@@ -37,7 +37,7 @@ class Login extends Controller
         # auth
         if($model->auth()) { # successful login
             # login user
-            $_SESSION['logged_in'] = true;
+            Session::set('logged_in', true);
             # redirect
             $this->redirectUrl(self::LOGIN_REDIRECT_URL);
         }
@@ -81,7 +81,7 @@ class Login extends Controller
         $model->init($this->request->getPost());
 
         if($model->delete()) {
-            unset($_SESSION['logged_in']);
+            Session::set('logged_in', false);
             $this->redirectUrl(URL);
         }
 

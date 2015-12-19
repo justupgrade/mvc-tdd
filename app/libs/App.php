@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 class App
 {
     static public function getModel($name)
@@ -14,7 +12,7 @@ class App
 
     static public function userLoggedIn()
     {
-        return (isset($_SESSION['logged_in']) && $_SESSION['logged_in']) ? true : false;
+        return Session::get('logged_in');
     }
 
     static public function getRegisterUrl()

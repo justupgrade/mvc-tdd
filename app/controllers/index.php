@@ -20,4 +20,8 @@ class Index extends Controller
 
         return true;
     }
+
+    public function test()
+    {
+    }
 } 
