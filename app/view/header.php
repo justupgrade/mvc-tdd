@@ -2,6 +2,10 @@
 <head>
     <title><?php echo $this->page_title ?></title>
     <link rel="stylesheet" href="<?php echo URL ?>dist/css/bootstrap.min.css">
+    <?php
+        if(isset($this->js)): foreach($this->js as $js): ?>
+        <script type="text/javascript" src="<?php echo URL.'view/'.$js ?>" ></script>
+    <?php endforeach; endif ?>
 </head>
 <body>
 <div id="header">
