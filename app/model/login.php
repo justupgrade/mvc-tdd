@@ -2,12 +2,12 @@
 
 namespace model;
 
+use App;
 use Model;
 
 class Login extends Model
 {
-    private $email = null;
-    private $password = null;
+    private $user = null;
 
     function __construct()
     {
@@ -21,17 +21,17 @@ class Login extends Model
 
     public function auth()
     {
-        if($this->email && $this->password) {
+        if(($email = $this->user->getEmail()) && ($pass = $this->user->getPassword())) {
             $stmt = self::$pdo->prepare("SELECT * FROM users WHERE email=:email");
             $stmt->execute(array(
-                ':email'    => $this->email,
+                ':email'    => $email,
             ));
 
             $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
             if($data) {
                 $hashed = $data[0]['password'];
-                if(password_verify($this->password, $hashed)) {
+                if(password_verify($pass, $hashed)) {
                     return true;
                 }
                 else {
@@ -48,17 +48,17 @@ class Login extends Model
     //TODO:: RETURN NEW USER
     public function register()
     {
-        if($this->email && $this->password) {
+        if(($email = $this->user->getEmail()) && ($pass = $this->user->getPassword())) {
             $stmt = self::$pdo->prepare("SELECT * FROM users WHERE email=:email");
             $stmt->execute(array(
-                ':email'    => $this->email,
+                ':email'    => $email,
             ));
 
             $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             if(!$data) {
                 $stmt = self::$pdo->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
-                $stmt->bindParam(':email', $this->email);
-                $stmt->bindParam(':password', $this->getHashedPassword($this->password));
+                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':password', $this->getHashedPassword($pass));
                 $stmt->execute();
 
                 return true;
@@ -70,10 +70,10 @@ class Login extends Model
 
     public function delete()
     {
-        if($this->email) {
+        if($email = $this->user->getEmail()) {
             $sql = "DELETE FROM users WHERE email = :email";
             $stmt = self::$pdo->prepare($sql);
-            $stmt->bindParam(':email', $this->email, \PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, \PDO::PARAM_STR);
             $stmt->execute();
 
             return true;
@@ -85,8 +85,10 @@ class Login extends Model
     private function filterPost($data)
     {
         $email = isset($data['email']) ? $data['email'] : null;
-        $this->password = isset($data['password']) ? $data['password'] : null;
+        $email = filter_var($email, FILTER_VALIDATE_EMAIL);
 
-        $this->email = filter_var($email, FILTER_VALIDATE_EMAIL);
+        $password = isset($data['password']) ? $data['password'] : null;
+
+        $this->user = App::getModel('user')->init($email, $password);
     }
 }
