@@ -19,13 +19,18 @@
                 <li class="nav-item">
                     <a href="/help" class="nav-link">Help</a>
                 </li>
+                <?php if(!App::userLoggedIn()): ?>
                 <li class="nav-item">
-                    <?php if(!App::userLoggedIn()): ?>
                     <a href="/login" class="nav-link">Login</a>
-                    <?php else: ?>
-                    <a href="/login/out" class="nav-link">Logout</a>
-                    <?php endif ?>
                 </li>
+                <?php else: ?>
+                <li class="nav-item">
+                    <a href="/dashboard" class="nav-link">Account</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/login/out" class="nav-link">Logout</a>
+                </li>
+                <?php endif ?>
             </ul>
         </div>
     </nav>

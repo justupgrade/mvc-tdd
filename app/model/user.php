@@ -1,24 +1,30 @@
 <?php
 
 namespace model;
-use Model;
 
-class User extends Model
+class User
 {
     private $email = null;
     private $password = null;
+    private $id = null;
 
     function __construct()
     {
 
     }
 
-    public function init($email, $pass)
+    public function init($id, $email, $pass)
     {
+        $this->id = $id;
         $this->email = $email;
         $this->password = $pass;
 
         return $this;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getEmail()
@@ -29,5 +35,10 @@ class User extends Model
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

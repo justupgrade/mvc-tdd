@@ -35,11 +35,11 @@ class Session
 
     static public function set($key, $value)
     {
-        $_SESSION[$key] = $value;
+        $_SESSION[$key] = serialize($value);
     }
 
     static public function get($key)
     {
-        return isset($_SESSION[$key]) ? $_SESSION[$key] : null;
+        return isset($_SESSION[$key]) ? unserialize($_SESSION[$key]) : null;
     }
 }

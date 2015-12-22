@@ -4,10 +4,15 @@ class App
 {
     static public function getModel($name)
     {
-        require_once APP_DIR . 'model/' . "$name.php";
+        self::loadModel($name);
         $ClassName = "\\model\\".ucfirst($name);
 
         return new $ClassName;
+    }
+
+    static public function loadModel($name)
+    {
+        require_once APP_DIR . 'model/' . "$name.php";
     }
 
     static public function userLoggedIn()

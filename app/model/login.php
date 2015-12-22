@@ -32,7 +32,8 @@ class Login extends Model
             if($data) {
                 $hashed = $data[0]['password'];
                 if(password_verify($pass, $hashed)) {
-                    return true;
+                    $this->user->setId($data[0]['id']);
+                    return $this->user;
                 }
                 else {
                    // trigger_error("ERROR! Wrong password: " . $password);
@@ -89,6 +90,6 @@ class Login extends Model
 
         $password = isset($data['password']) ? $data['password'] : null;
 
-        $this->user = App::getModel('user')->init($email, $password);
+        $this->user = App::getModel('user')->init(null, $email, $password);
     }
 }

@@ -35,9 +35,10 @@ class Login extends Controller
         # validate request data
         $model->init($this->request->getPost());
         # auth
-        if($model->auth()) { # successful login
+        if($user = $model->auth()) { # successful login
             # login user
             Session::set('logged_in', true);
+            Session::set('user', $user);
             # redirect
             $this->redirectUrl(self::LOGIN_REDIRECT_URL);
         }
@@ -82,6 +83,7 @@ class Login extends Controller
 
         if($model->delete()) {
             Session::set('logged_in', false);
+            Session::set('user', null);
             $this->redirectUrl(URL);
         }
 
@@ -92,7 +94,8 @@ class Login extends Controller
     //TODO::add some messages
     public function out()
     {
-        unset($_SESSION['logged_in']);
+        Session::set('logged_in', false);
+        Session::set('user', null);
 
         $this->redirectUrl(URL);
     }

@@ -4,6 +4,9 @@ class Dashboard extends Controller
 {
     function __construct()
     {
+        # import user definition
+        App::loadModel('user');
+
         parent::__construct();
         $this->view->page_title = 'Dashboard';
         if(!App::userLoggedIn()) {
@@ -11,6 +14,7 @@ class Dashboard extends Controller
         }
 
         $this->view->js = array('dashboard/js/default.js');
+        $this->view->user = Session::get('user');
     }
 
     public function index()
