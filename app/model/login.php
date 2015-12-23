@@ -85,9 +85,7 @@ class Login extends Model
 
     private function filterPost($data)
     {
-        $email = isset($data['email']) ? $data['email'] : null;
-        $email = filter_var($email, FILTER_VALIDATE_EMAIL);
-
+        $email = User::FilterEmail($data['email']);
         $password = isset($data['password']) ? $data['password'] : null;
 
         $this->user = App::getModel('user')->init(null, $email, $password);

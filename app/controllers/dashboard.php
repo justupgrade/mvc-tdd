@@ -1,5 +1,7 @@
 <?php
 
+use model\User as User;
+
 class Dashboard extends Controller
 {
     function __construct()
@@ -24,8 +26,19 @@ class Dashboard extends Controller
         return true;
     }
 
+    # update user data: ajax call
     public function changeEmailAjax()
     {
+        # some validation...
+        $new_email = User::FilterEmail($this->request->getPost()['new_email']);
+        $response = array();
 
+        if($new_email) {
+            $response['msg'] = 'Success';
+        } else {
+            $response['msg'] = 'Error';
+        }
+
+        echo json_encode($response);
     }
 }

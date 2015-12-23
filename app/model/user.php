@@ -13,6 +13,12 @@ class User
 
     }
 
+    static public function FilterEmail($_email)
+    {
+        $email = $_email ? $_email : null;
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
+    }
+
     public function init($id, $email, $pass)
     {
         $this->id = $id;
