@@ -12,6 +12,8 @@ class Login extends Model
     function __construct()
     {
         parent::__construct();
+
+        App::loadModel('user');
     }
 
     public function init($data)
@@ -67,6 +69,20 @@ class Login extends Model
         }
 
         return null;
+    }
+
+    # udpate email
+
+    public function updateEmail($user)
+    {
+        $this->user = $user;
+
+        $sql = "UPDATE users SET email=:email WHERE id=:id";
+        $stmt = self::$pdo->prepare($sql);
+        $stmt->execute(array(
+            ':email'    => $this->user->getEmail(),
+            ':id'       => $this->user->getId(),
+        ));
     }
 
     public function delete()

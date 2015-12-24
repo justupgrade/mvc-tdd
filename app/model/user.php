@@ -1,6 +1,9 @@
 <?php
 
 namespace model;
+use Model;
+use App;
+use Session;
 
 class User
 {
@@ -11,6 +14,17 @@ class User
     function __construct()
     {
 
+    }
+
+    static public function test()
+    {
+        echo 'test';
+    }
+
+    public function update()
+    {
+        App::getModel('login')->updateEmail($this);
+        Session::set('user', $this);
     }
 
     static public function FilterEmail($_email)
@@ -31,6 +45,11 @@ class User
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
     public function getEmail()

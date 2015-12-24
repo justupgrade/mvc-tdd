@@ -35,6 +35,9 @@ class Dashboard extends Controller
 
         if($new_email) {
             $response['msg'] = 'Success';
+            $user = Session::get('user');
+            $user->setEmail($new_email);
+            $user->update();
         } else {
             $response['msg'] = 'Error';
         }
