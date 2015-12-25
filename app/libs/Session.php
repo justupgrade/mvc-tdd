@@ -42,4 +42,11 @@ class Session
     {
         return isset($_SESSION[$key]) ? unserialize($_SESSION[$key]) : null;
     }
+
+    static public function Clear()
+    {
+        self::set('logged_in', false);
+        self::set('user', null);
+        self::set('role', null);
+    }
 }

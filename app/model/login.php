@@ -35,6 +35,7 @@ class Login extends Model
                 $hashed = $data[0]['password'];
                 if(password_verify($pass, $hashed)) {
                     $this->user->setId($data[0]['id']);
+                    $this->user->setRole($data[0]['role']);
                     return $this->user;
                 }
                 else {
@@ -59,9 +60,11 @@ class Login extends Model
 
             $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             if(!$data) {
-                $stmt = self::$pdo->prepare("INSERT INTO users (email, password) VALUES (:email, :password)");
+                $default_role = 'default';
+                $stmt = self::$pdo->prepare("INSERT INTO users (email, password, role) VALUES (:email, :password, :role)");
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':password', $this->getHashedPassword($pass));
+                $stmt->bindParam(':role', $default_role);
                 $stmt->execute();
 
                 return true;

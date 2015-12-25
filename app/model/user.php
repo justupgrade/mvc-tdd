@@ -10,6 +10,7 @@ class User
     private $email = null;
     private $password = null;
     private $id = null;
+    private $role = 'default';
 
     function __construct()
     {
@@ -47,9 +48,19 @@ class User
         $this->id = $id;
     }
 
+    public function setRole($role)
+    {
+        $this->role = $role;
+    }
+
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+
+    public function getRole()
+    {
+        return $this->role;
     }
 
     public function getEmail()
