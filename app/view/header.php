@@ -21,8 +21,13 @@
                 </li>
                 <?php else: ?>
                 <li class="nav-item">
-                    <a href="/dashboard" class="nav-link">Account</a>
+                    <a href="/dashboard" class="nav-link">Dashboard</a>
                 </li>
+                    <?php if(Session::get('role') == 'owner'): ?>
+                        <li class="nav-item">
+                            <a href="/user" class="nav-link">Users</a>
+                        </li>
+                    <?php endif ?>
                 <li class="nav-item">
                     <a href="/login/out" class="nav-link">Logout</a>
                 </li>

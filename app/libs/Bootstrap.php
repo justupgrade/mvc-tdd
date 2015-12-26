@@ -1,5 +1,7 @@
 <?php
 
+use controllers\user as User;
+
 class Bootstrap
 {
     function __construct()
@@ -31,6 +33,9 @@ class Bootstrap
 
         if(file_exists($file)) {
             require_once "$file";
+            if($controller_name == 'user') {
+                $controller_name = "\controllers\User";
+            }
             $controller = new $controller_name;
             if (method_exists($controller, $controller_action)) {
                 $controller->{$controller_action}($action_args);
