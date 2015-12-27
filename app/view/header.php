@@ -2,6 +2,7 @@
 <head>
     <title><?php echo $this->page_title ?></title>
     <link rel="stylesheet" href="<?php echo URL ?>dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
 <div id="header">

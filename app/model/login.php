@@ -16,6 +16,14 @@ class Login extends Model
         App::loadModel('user');
     }
 
+    public  function getUsers()
+    {
+        $stmt = self::$pdo->prepare("SELECT * FROM users");
+        $stmt->execute();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function init($data)
     {
         $this->filterPost($data);
@@ -60,11 +68,12 @@ class Login extends Model
 
             $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             if(!$data) {
-                $default_role = 'default';
+                $role = 'default';
+                if($user_role = $this->user->getRole()) $role = $user_role;
                 $stmt = self::$pdo->prepare("INSERT INTO users (email, password, role) VALUES (:email, :password, :role)");
                 $stmt->bindParam(':email', $email);
                 $stmt->bindParam(':password', $this->getHashedPassword($pass));
-                $stmt->bindParam(':role', $default_role);
+                $stmt->bindParam(':role', $role);
                 $stmt->execute();
 
                 return true;
@@ -106,7 +115,9 @@ class Login extends Model
     {
         $email = User::FilterEmail($data['email']);
         $password = isset($data['password']) ? $data['password'] : null;
+        $role = isset($data['role']) ? $data['role'] : 'default';
 
         $this->user = App::getModel('user')->init(null, $email, $password);
+        $this->user->setRole($role);
     }
 }
