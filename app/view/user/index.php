@@ -11,6 +11,8 @@
 <div class="modal fade" id="createForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <div id="error-container" class="alert alert-danger" role="alert">
+            </div>
             <form method='post' id="create-user-form" action="<?php echo URL.'user/create' ?>">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

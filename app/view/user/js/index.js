@@ -1,6 +1,7 @@
 var $form = $('#create-user-form');
 
 $form.submit(createUserFormSubmited);
+$('#error-container').hide();
 
 function createUserFormSubmited(e)
 {
@@ -16,5 +17,9 @@ function createUserFormSubmited(e)
 
 function onPostCompleted(data)
 {
-    console.log(data);
+    data = JSON.parse(data);
+    if(data['msg'] == 'Success') location.reload();
+    else {
+        $('#error-container').html('ERROR!!!').show();
+    }
 }
