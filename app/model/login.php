@@ -111,6 +111,20 @@ class Login extends Model
         return null;
     }
 
+    public function deleteById($id)
+    {
+        if($id && $id != '1') {
+            $sql = "DELETE FROM users WHERE id = :id";
+            $stmt = self::$pdo->prepare($sql);
+            $stmt->bindParam(':id', $id, \PDO::PARAM_INT);
+            $stmt->execute();
+
+            return true;
+        }
+
+        return null;
+    }
+
     private function filterPost($data)
     {
         $email = User::FilterEmail($data['email']);

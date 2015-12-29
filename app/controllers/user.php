@@ -47,8 +47,25 @@ class User extends Controller
 
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $response = array();
+
+        if($this->request->isAjax()) {
+            $model = App::getModel('login');
+            if($model->deleteById($id)) {
+                $response['msg'] = 'Success';
+            } else {
+                $response['msg'] = 'Error';
+                $response['error'] = 'Could not delete user!';
+            }
+
+        } else {
+            $response['msg'] = 'Error';
+            $response['error'] = 'Ugly Hacker!!!';
+        }
+
+        echo json_encode($response);
 
     }
 }

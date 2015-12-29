@@ -79,15 +79,16 @@
     <tbody class="">
     <?php foreach($this->users as $user): ?>
         <?php
+            $user_id = $user['id'];
             $role = $user['role'];
             $classes = '';
             if($role == 'owner') $classes .= 'danger';
         ?>
         <tr class="<?php echo $classes ?>">
-            <td><?php echo $user['id'] ?></td>
+            <td><?php echo $user_id ?></td>
             <td><?php echo $user['email'] ?></td>
             <td><?php echo $role ?></td>
-            <td>
+            <td id="user-<?php echo $user_id ?>" class="user-actions">
                 <a class="btn btn-primary-outline" href="#" role="button">
                     <i class="fa fa-pencil-square-o"></i>
                 </a>
