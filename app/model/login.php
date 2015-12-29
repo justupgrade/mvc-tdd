@@ -115,7 +115,7 @@ class Login extends Model
     {
         $email = User::FilterEmail($data['email']);
         $password = isset($data['password']) ? $data['password'] : null;
-        $role = isset($data['role']) ? $data['role'] : 'default';
+        $role = isset($data['roles']) ? $data['roles'] : 'default';
 
         $this->user = App::getModel('user')->init(null, $email, $password);
         $this->user->setRole($role);

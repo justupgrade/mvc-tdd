@@ -36,6 +36,7 @@ class User extends Controller
             $response['msg'] = 'Success';
         } else {
             $response['msg'] = 'Error';
+            $response['error'] = 'Could not register';
         }
 
         echo json_encode($response);

@@ -18,8 +18,9 @@ function createUserFormSubmited(e)
 function onPostCompleted(data)
 {
     data = JSON.parse(data);
+    console.log(data);
     if(data['msg'] == 'Success') location.reload();
     else {
-        $('#error-container').html('ERROR!!!').show();
+        $('#error-container').html(data['error']).show();
     }
 }
