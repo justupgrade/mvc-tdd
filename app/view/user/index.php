@@ -81,14 +81,21 @@
         <?php
             $user_id = $user['id'];
             $role = $user['role'];
-            $classes = '';
-            if($role == 'owner') $classes .= 'danger';
         ?>
-        <tr class="<?php echo $classes ?>">
+        <tr>
             <td><?php echo $user_id ?></td>
-            <td><?php echo $user['email'] ?></td>
-            <td><?php echo $role ?></td>
+            <td><input class="form-control" type="email" name="email" value="<?php echo $user['email'] ?>" disabled /></td>
+            <td>
+                <select name="roles" class="form-control" disabled>
+                    <option value="default" <?php if($role == 'default') echo 'selected' ?> >Default</option>
+                    <option value="admin" <?php if($role == 'admin') echo 'selected' ?> >Admin</option>
+                    <option value="owner" <?php if($role == 'owner') echo 'selected' ?> disabled>Owner</option>
+                </select>
+            </td>
             <td id="user-<?php echo $user_id ?>" class="user-actions">
+                <a class="btn btn-success-outline" href="#" role="button">
+                    <i class="fa fa-floppy-o"></i>
+                </a>
                 <a class="btn btn-primary-outline" href="#" role="button">
                     <i class="fa fa-pencil-square-o"></i>
                 </a>
