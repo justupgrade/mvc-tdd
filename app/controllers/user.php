@@ -42,9 +42,25 @@ class User extends Controller
         echo json_encode($response);
     }
 
-    public function edit()
+    public function edit($id)
     {
+        $response = array();
 
+        if($this->request->isAjax()) {
+            $model = App::getModel('login');
+            $model->init($this->request->getPost());
+            if($model->update($id)) {
+                $response['msg'] = 'Success';
+            } else {
+                $response['msg'] = 'Error';
+                $response['error'] = 'Could not update user!';
+            }
+        } else {
+            $response['msg'] = 'Error';
+            $response['error'] = 'Ugly Hacker!!!';
+        }
+
+        echo json_encode($response);
     }
 
     public function delete($id)

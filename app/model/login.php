@@ -83,6 +83,30 @@ class Login extends Model
         return null;
     }
 
+    public function update($id)
+    {
+        $stmt = self::$pdo->prepare("SELECT * FROM users WHERE id!=:id AND email=:email");
+        $stmt->execute(array(
+            ':email'    => $this->user->getEmail(),
+            ':id'       => $id,
+        ));
+
+        $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        if(!$data) {
+            $sql = "UPDATE users SET email=:email, role=:role WHERE id=:id";
+            $stmt = self::$pdo->prepare($sql);
+            $stmt->execute(array(
+                ':email'    => $this->user->getEmail(),
+                ':role'     => $this->user->getRole(),
+                ':id'       => $id,
+            ));
+
+            return true;
+        }
+
+        return false;
+    }
+
     # udpate email
 
     public function updateEmail($user)
@@ -130,6 +154,8 @@ class Login extends Model
         $email = User::FilterEmail($data['email']);
         $password = isset($data['password']) ? $data['password'] : null;
         $role = isset($data['roles']) ? $data['roles'] : 'default';
+
+        if(!in_array($role, ['default', 'admin', 'owner'])) $role = 'default';
 
         $this->user = App::getModel('user')->init(null, $email, $password);
         $this->user->setRole($role);

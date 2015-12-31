@@ -36,6 +36,25 @@ function onEditClick(e)
 function onSaveClick(e)
 {
     e.preventDefault();
+
+    var parent = $((e.currentTarget).parentNode);
+    var userId = (parent.attr('id')).split('-')[1];
+
+    var email = currentEditRow.children().first().next().children().first().val();
+    var role = currentEditRow.children().first().next().next().children().first().val();
+
+    var url = 'http://' + document.domain + '/user/edit/' + userId;
+
+    var formData = { "email": email, "roles": role };
+
+    $.post(url, formData, onEditPostCompleted);
+}
+
+function onEditPostCompleted(data)
+{
+    data = JSON.parse(data);
+    if(data['msg'] == 'Success') location.reload();
+    else console.log(data['error']);
 }
 
 function deleteUser(e)

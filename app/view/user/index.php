@@ -89,7 +89,7 @@
                 <select name="roles" class="form-control" disabled>
                     <option value="default" <?php if($role == 'default') echo 'selected' ?> >Default</option>
                     <option value="admin" <?php if($role == 'admin') echo 'selected' ?> >Admin</option>
-                    <option value="owner" <?php if($role == 'owner') echo 'selected' ?> disabled>Owner</option>
+                    <option value="owner" <?php if($role == 'owner') { echo 'selected'; } else { echo 'disabled'; } ?> >Owner</option>
                 </select>
             </td>
             <td id="user-<?php echo $user_id ?>" class="user-actions">
