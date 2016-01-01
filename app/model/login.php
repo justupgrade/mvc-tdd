@@ -160,4 +160,9 @@ class Login extends Model
         $this->user = App::getModel('user')->init(null, $email, $password);
         $this->user->setRole($role);
     }
+
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
 }

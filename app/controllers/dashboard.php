@@ -34,10 +34,20 @@ class Dashboard extends Controller
         $response = array();
 
         if($new_email) {
-            $response['msg'] = 'Success';
             $user = Session::get('user');
+            $old_email = $user->getEmail();
             $user->setEmail($new_email);
-            $user->update();
+
+            $model = App::getModel('login');
+            $model->setUser($user);
+            if($model->update($user->getId())) {
+                $response['msg'] = 'Success';
+            } else {
+                $response['msg'] = 'Error';
+                $response['error'] = 'Could not update user!';
+                $user->setEmail($old_email);
+            }
+            Session::set('user', $user);
         } else {
             $response['msg'] = 'Error';
         }

@@ -22,12 +22,6 @@ class User
         echo 'test';
     }
 
-    public function update()
-    {
-        App::getModel('login')->updateEmail($this);
-        Session::set('user', $this);
-    }
-
     static public function FilterEmail($_email)
     {
         $email = $_email ? $_email : null;
