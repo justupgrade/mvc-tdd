@@ -8,6 +8,7 @@ use Model;
 class Login extends Model
 {
     private $user = null;
+    private $errors = null;
 
     function __construct()
     {
@@ -144,6 +145,9 @@ class Login extends Model
             $stmt->execute();
 
             return true;
+        } else {
+            $this->errors = array();
+            $this->errors[] = "Can not delete owner!";
         }
 
         return null;
@@ -164,5 +168,10 @@ class Login extends Model
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
     }
 }

@@ -1,6 +1,7 @@
 <div class="page-header">
     <h1>This is users page! Owner only.</h1>
 </div>
+<div id="messages"></div>
 <!-- CREATE FORM -->
 <div>
     <button type="button" class="btn btn-primary btn-lg pull-right" data-toggle="modal" data-target="#createForm">

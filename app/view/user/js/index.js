@@ -74,7 +74,10 @@ function onDeletePostCompleted(data)
 {
     data = JSON.parse(data);
     if(data['msg'] == 'Success') location.reload();
-    else console.log(data['error']);
+    else {
+        var errors = data['errors_html'];
+        $('#messages').html(errors);
+    }
 }
 
 function createUserFormSubmited(e)

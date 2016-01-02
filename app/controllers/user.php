@@ -73,15 +73,29 @@ class User extends Controller
                 $response['msg'] = 'Success';
             } else {
                 $response['msg'] = 'Error';
-                $response['error'] = 'Could not delete user!';
+                $response['errors_html'] = $this->getErrorsHtml($model->getErrors());
             }
 
         } else {
             $response['msg'] = 'Error';
-            $response['error'] = 'Ugly Hacker!!!';
+            $response['errors_html'] = $this->getErrorsHtml(['Ugly Hacker!!!']);
         }
 
         echo json_encode($response);
 
+    }
+
+    private function getErrorsHtml($errors)
+    {
+        $error = $errors[0]; # display first error
+        $out = '<div class="alert alert-danger alert-dismissible" role="alert">';
+        $out .= '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+        $out .= '<span aria-hidden="true">&times;</span>';
+        $out .= '</button>';
+        $out .= '<strong>Error!</strong> ';
+        $out .= $error;
+        $out .= '</div>';
+
+        return $out;
     }
 }
