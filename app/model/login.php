@@ -27,7 +27,7 @@ class Login extends Model
 
     public function init($data)
     {
-        $this->filterPost($data);
+        return $this->filterPost($data);
     }
 
     public function auth()
@@ -163,6 +163,13 @@ class Login extends Model
 
         $this->user = App::getModel('user')->init(null, $email, $password);
         $this->user->setRole($role);
+
+        if(strlen(trim($password)) < 3){
+            $this->errors = ['Password is too short.'];
+            return false;
+        }
+
+        return true;
     }
 
     public function setUser($user)

@@ -1,3 +1,6 @@
+<div id="messages">
+    <?php if($this->error_msg != null) echo $this->error_msg ?>
+</div>
 <div>
     <a href="<?php echo $this->getRegisterUrl() ?>">Create an Account</a>
 </div>

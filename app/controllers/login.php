@@ -25,6 +25,8 @@ class Login extends Controller
 
         App::getModel('login');
         # user not logged in
+        $this->view->error_msg = Session::get('error_msg');
+        Session::set('error_msg', null);
         $this->view->render('login/index');
     }
 
@@ -33,17 +35,19 @@ class Login extends Controller
     {
         $model = App::getModel('login');
         # validate request data
-        $model->init($this->request->getPost());
-        # auth
-        if($user = $model->auth()) { # successful login
-            # login user
-            Session::set('logged_in', true);
-            Session::set('user', $user);
-            Session::set('role', $user->getRole());
-            # redirect
-            $this->redirectUrl(self::LOGIN_REDIRECT_URL);
+        if($model->init($this->request->getPost())) {
+            # auth
+            if($user = $model->auth()) { # successful login
+                # login user
+                Session::set('logged_in', true);
+                Session::set('user', $user);
+                Session::set('role', $user->getRole());
+                # redirect
+                $this->redirectUrl(self::LOGIN_REDIRECT_URL);
+            }
         }
 
+        Session::set('error_msg', $this->getErrorsHtml($model->getErrors()));
         # get errors from model; put them into session
         $this->redirectUrl(URL.'login');
     }
