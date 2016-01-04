@@ -49,4 +49,9 @@ class Session
         self::set('user', null);
         self::set('role', null);
     }
+
+    static public function unset_key($key)
+    {
+        if(isset($_SESSION[$key])) unset($_SESSION[$key]);
+    }
 }
